@@ -203,9 +203,9 @@ class App extends Component{
     })
   }
   
-  chatPopUp=(visible)=>{
-    this.setState({modalVisible:visible})
-  }
+  // chatPopUp=(visible)=>{
+  //   this.setState({modalVisible:visible})
+  // }
 
   
   
@@ -232,7 +232,9 @@ class App extends Component{
               {props => <DisplayingChat {...props} chat={this.state.chat} setCurrentChat={this.setCurrentChat}/>}
               </this.state.Tab.Screen>
               <this.state.Tab.Screen name='contacts'>
-                {props=> <Contacts {...props} chat={this.state.chat} chatPopUp={this.chatPopUp}/>}
+                {props=> <Contacts {...props} chat={this.state.chat} 
+                // chatPopUp={this.chatPopUp}
+                />}
               </this.state.Tab.Screen>
             </this.state.Tab.Navigator>    
           </NavigationContainer>

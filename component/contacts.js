@@ -10,24 +10,43 @@ export class Contacts extends Component{
             modalVisible: false
         }
     }
+
+    setModalVisible = (visible) => {
+        this.setState({ modalVisible: visible });
+    }
     render(){
         const { modalVisible} = this.state;
         return(
             <ScrollView>
                 {Array.from(this.props.chat).map((contact)=>{
                     return(
-                        <View>
-                            <Modal>
-
+                        <View key={contact.id}>
+                            <Modal
+                                animationType='none'
+                                transparent={true}
+                                visible={modalVisible}
+                                onRequestClose={()=>{
+                                    Alert.alert("Modal has been closed.");
+                                    this.setModalVisible(!modalVisible)
+                                }}>
+                                <View>
+                                    <View>
+                                        <Text>{contact.userName}</Text>
+                                        <Pressable
+                                            onPress={()=>this.setModalVisible(!modalVisible)}>
+                                            <Text>Close</Text>
+                                        </Pressable>
+                                    </View>
+                                </View>
                             </Modal>
                             <Pressable
-                                onPress={()=>this.props.chatPopUp(contact.id)}>
+                                onPress={()=>this.setModalVisible(!modalVisible)}>
                                 <Text key={contact.id} style={globalStyles.chatList} 
-                                onPress={()=>{
-                                    this.props.chatPopUp(contact.id);
+                                // onPress={()=>{
+                                //     this.props.chatPopUp(contact.id);
                                     // console.log('selected:', this.props.id)
-                                    }
-                                    }>{contact.userName}</Text>
+                                    // }}
+                                    >{contact.userName}</Text>
                             </Pressable>  
                         </View>
                         
